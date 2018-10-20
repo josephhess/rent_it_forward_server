@@ -1,23 +1,24 @@
-// 'use strict';
-// const mongoose = require('mongoose');
+'use strict';
+const mongoose = require('mongoose');
 
-// mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
-// const OfferSchema = mongoose.Schema({
-//   item_id: {type: Number,required: true},
-//   offer_price: {type: Number, required: true},
-//   user_id: {type: Number, required: true},
-//   status: {type: String, enum: ['pending', 'accepted'] }
-// });
+const OfferSchema = mongoose.Schema({
+  item_id: {type: Number,required: true},
+  offer_price: {type: Number, required: true},
+  user_id: {type: Number, required: true},
+  status: {type: String, enum: ['pending', 'accepted'],default: 'pending' },
+  
+});
 
-// OfferSchema.methods.serialize = function() {
-//   return {
-//     id: this.id || '',
-//     name: this.name || '',
-//     offer_price: this.offer_price || '',
-//     user_id: this.user_id || ''
-//   };
-// };
+OfferSchema.methods.serialize = function() {
+  return {
+    id: this.id || '',
+    name: this.name || '',
+    offer_price: this.offer_price || '',
+    user_id: this.user_id || ''
+  };
+};
 
 // OfferSchema.set('toObject', {
 //   virtuals: true,
@@ -27,4 +28,4 @@
 //   }
 // });
 
-// const Offer = mongoose.model('Offer', OfferSchema);
+module.exports = mongoose.model('Offer', OfferSchema);
