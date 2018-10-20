@@ -48,32 +48,29 @@ router.get('/:id', (req, res, next) => {
 /* ========== POST/CREATE AN ITEM ========== */
 router.post('/', (req, res, next) => {
   const { 
-    email,
-    password,
-    firstName,
-    lastName,
-    zipCode 
+    name,
+    initial_price,
+    user_id,
+    description 
   } = req.body;
 
   const newItem = { 
-    email,
-    password,
-    firstName,
-    lastName,
-    zipCode 
+    name,
+    initial_price,
+    user_id,
+    description
   };
 
   /***** Never trust users - validate input *****/
   const required_params = [
-    email,
-    password,
-    firstName,
-    lastName,
-    zipCode 
+    'name',
+    'initial_price',
+    'user_id',
+    'description'
   ];
   required_params.forEach(param => {
-    if (!param) {
-      const err = new Error('Missing `name` in request body');
+    if (!newItem[param]) {
+      const err = new Error(`Missing ${param} in request body`);
       err.status = 400;
       return next(err);
     }

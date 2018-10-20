@@ -1,22 +1,24 @@
-// 'use strict';
-// const mongoose = require('mongoose');
+'use strict';
+const mongoose = require('mongoose');
 
-// mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
-// const ItemSchema = mongoose.Schema({
-//   name: {type: String,required: true},
-//   initial_price: {type: Number, required: true},
-//   user_id: {type: Number, required: true}
-// });
+const ItemSchema = mongoose.Schema({
+  name: {type: String,required: true},
+  initial_price: {type: Number, required: true},
+  user_id: {type: Number, required: true},
+  description: {type: String, required: true}
+});
 
-// ItemSchema.methods.serialize = function() {
-//   return {
-//     id: this.id || '',
-//     name: this.name || '',
-//     initial_price: this.initial_price || '',
-//     user_id: this.user_id || ''
-//   };
-// };
+ItemSchema.methods.serialize = function() {
+  return {
+    id: this.id || '',
+    name: this.name || '',
+    initial_price: this.initial_price || '',
+    user_id: this.user_id || '',
+    description: this.description || ''
+  };
+};
 
 // ItemSchema.set('toObject', {
 //   virtuals: true,
@@ -26,4 +28,4 @@
 //   }
 // });
 
-// const Item = mongoose.model('Item', ItemSchema);
+module.exports = mongoose.model('Item', ItemSchema);

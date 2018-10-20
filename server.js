@@ -26,7 +26,7 @@ app.use(express.json());
 
 // Mount routers
 app.use('/api/users', usersRouter);
-// app.use('/api/items', itemsRouter);
+app.use('/api/items', itemsRouter);
 // app.use('/api/offers', offersRouter);
 
 // Custom 404 Not Found route handler
