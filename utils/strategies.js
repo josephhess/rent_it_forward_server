@@ -24,7 +24,6 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
       return user.validatePassword(password);
     })
     .then(isValid => {
-      console.log(isValid)
       if (!isValid) {
 
         return Promise.reject({
