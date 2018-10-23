@@ -3,9 +3,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const User = require('../models/user');
-
+const {User} = require('../models/user');
+const cors = require('cors');
 const router = express.Router();
+router.all('*', cors());
 
 /* ========== GET/READ ALL ITEMS ========== */
 router.get('/', (req, res, next) => {

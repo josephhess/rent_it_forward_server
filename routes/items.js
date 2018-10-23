@@ -1,12 +1,13 @@
 'use strict';
-
 const express = require('express');
+const passport = require('passport');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const Item = require('../models/item');
 
-
 const router = express.Router();
+router.all('*', cors());
 
 /* ========== GET/READ ALL ITEMS ========== */
 router.get('/', (req, res, next) => {
@@ -44,20 +45,19 @@ router.get('/:id', (req, res, next) => {
       next(err);
     });
 });
-
+const jwtAuth = passport.authenticate('jwt', {session: false});
 /* ========== POST/CREATE AN ITEM ========== */
-router.post('/', (req, res, next) => {
+router.post('/', jwtAuth, (req, res, next) => {
   const { 
     name,
     initial_price,
-    user_id,
-    description 
+    description
   } = req.body;
 
   const newItem = { 
     name,
     initial_price,
-    user_id,
+    user_id: req.user.id,
     description
   };
 
