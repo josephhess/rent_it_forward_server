@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services: mongodb
 script: true
+deploy: 
+  provider: heroku
+  api_key:
+    secure: ZDVXkeP9rByQ40t5MNJtJQCQxtMEGFdowjzZcpwZlhoj8yWuVVOARS10x4keNSlmWe1vn6dwUqM9l3+fg7ZyZ3SsMYfyFCWxZ1LHHRAMuIC6XyWWqJAqBTduA6md4QrHc7HiWAkmoCMo8xNOm/jYY9/mtNAQZ6oRT6UTv1/XXhGifJ5UWs2SJc5Y8by6t/P7IbBoY1OBGM8j1we1EDLdpNy5QDMbfxhyIdtZveNYWaaJWfq+OD9O3S/cypenba+T1f14gVSXy7BiUyAwhDx5RRP4hd67NrAXS3zbe9nvdpe5mVNe8hVRJlLm2YWHeeHiAMXeznPZxrFMhmk9a+/Tw10oaEtcEF6pCgpSvQuLrhOgbWINXNBtuO/xRz0kvxA/voCNaalwnVeAHedu8GZR/NWx+vkrdFLek82KyJ0dTeQgqo/S+alsRcY0sBZ6ogt0hkECJxUciFnSMl/vYs7OYNTcT9k6f45ninqFx94iBVw1h2gI6tm3n1gGJ1RjtHaLk0Dk/4iN6ceuwHnoZ6bqQPz3PrJL3a6Z850/CN+svLadj2KiGKo8JBxNrpNLmTByJsdVw7yaSo6X50lGD7LNR88UtKwv+J9wiSFNgZqUNuR/LkqO6vTKVTd9IoPLmerHbOCGcRpc/3cWfaNzW8pcQvQ6e+G94L3EBTqxTIicbTI=
+  app: https://radiant-hamlet-48553.herokuapp.com/
+  on:
+    repo: josephhess/rent_it_forward_server
