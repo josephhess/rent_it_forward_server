@@ -1,2 +1,2 @@
-Noteful App
+Rent it forward
 ============================
