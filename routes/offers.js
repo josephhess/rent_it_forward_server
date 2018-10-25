@@ -47,28 +47,78 @@ router.get('/:id', (req, res, next) => {
       next(err);
     });
 });
+// ================ offers by buyer =============
+
+router.get('/buyer/:buyer_user_id', (req,res, next) => {
+  const { buyer_user_id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(buyer_user_id)) {
+    const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+
+  Offer.find({buyer_user_id: buyer_user_id})
+    .then(results => {
+      if(results){
+        res.json(results);
+      } else {
+        next();
+      }
+    })
+    .catch(err => next(err));
+
+});
+// ================ offers by owner =============
+
+router.get('/owner/:owner_user_id', (req,res, next) => {
+  const { owner_user_id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(owner_user_id)) {
+    const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+
+  Offer.find({owner_user_id: owner_user_id})
+    .then(results => {
+      if(results){
+        res.json(results);
+      } else {
+        next();
+      }
+    })
+    .catch(err => next(err));
+
+});
 
 /* ========== POST/CREATE AN ITEM ========== */
 router.post('/', (req, res, next) => {
   const { 
     item_id,
-    user_id,
+    owner_user_id,
+    buyer_user_id,
     offer_price,
+    item_name,
     status 
   } = req.body;
 
-  const newOffer = { 
+  const newOffer = {
     item_id,
-    user_id,
+    owner_user_id,
+    buyer_user_id,
     offer_price,
+    item_name,
     status 
   };
 
   /***** Never trust users - validate input *****/
   const required_params = [
     'item_id',
-    'user_id',
-    'offer_price'
+    'owner_user_id',
+    'buyer_user_id',
+    'offer_price',
+    'item_name'
   ];
   required_params.forEach(param => {
     if (!newOffer[param]) {

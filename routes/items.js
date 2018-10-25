@@ -45,6 +45,31 @@ router.get('/:id', (req, res, next) => {
       next(err);
     });
 });
+
+// =================find by user id ======================
+
+router.get('/byuser/:user_id',(req, res, next) => {
+  const { user_id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(user_id)) {
+    const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+
+  Item.find({user_id: user_id})
+    .then(result => {
+      if (result) {
+        res.json(result);
+      } else {
+        next();
+      }
+    })
+    .catch(err => next(err));
+});
+
+
+
 const jwtAuth = passport.authenticate('jwt', {session: false});
 /* ========== POST/CREATE AN ITEM ========== */
 router.post('/', jwtAuth, (req, res, next) => {

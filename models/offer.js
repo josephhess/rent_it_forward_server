@@ -4,10 +4,12 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const OfferSchema = mongoose.Schema({
-  item_id: {type: Number,required: true},
+  item_id: {type: String,required: true},
   offer_price: {type: Number, required: true},
-  user_id: {type: Number, required: true},
-  status: {type: String, enum: ['pending', 'accepted'],default: 'pending' },
+  owner_user_id: {type: String, required: true},
+  buyer_user_id: {type: String, required: true},
+  item_name: {type: String, required: true},
+  status: {type: String, enum: ['pending', 'accepted','politely declined'],default: 'pending' },
   
 });
 
