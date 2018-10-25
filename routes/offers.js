@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const Offer = require('../models/Offer');
+const Offer = require('../models/offer');
 
 const router = express.Router();
 router.all('*', cors());
