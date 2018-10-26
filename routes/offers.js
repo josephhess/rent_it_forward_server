@@ -144,63 +144,44 @@ router.post('/', (req, res, next) => {
 });
 
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
-// router.put('/:id', (req, res, next) => {
-//   const { id } = req.params;
+router.put('/:id', (req, res, next) => {
+  const { id } = req.params;
+  
 
-//   const toUpdate = {};
-//   const updateableFields = ['title', 'content', 'folderId', 'tags'];
+  const toUpdate = {};
+  const updateableFields = ['status'];
 
-//   updateableFields.forEach(field => {
-//     if (field in req.body) {
-//       toUpdate[field] = req.body[field];
-//     }
-//   });
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
+  });
 
-//   /***** Never trust users - validate input *****/
-//   if (!mongoose.Types.ObjectId.isValid(id)) {
-//     const err = new Error('The `id` is not valid');
-//     err.status = 400;
-//     return next(err);
-//   }
+  /***** Never trust users - validate input *****/
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
 
-//   if (toUpdate.title === '') {
-//     const err = new Error('Missing `title` in request body');
-//     err.status = 400;
-//     return next(err);
-//   }
+  if (toUpdate.status === '') {
+    const err = new Error('Missing `status` in request body');
+    err.status = 400;
+    return next(err);
+  }
 
-//   if (toUpdate.folderId && !mongoose.Types.ObjectId.isValid(toUpdate.folderId)) {
-//     const err = new Error('The `folderId` is not valid');
-//     err.status = 400;
-//     return next(err);
-//   }
-
-//   if (toUpdate.tags) {
-//     const badIds = toUpdate.tags.filter((tag) => !mongoose.Types.ObjectId.isValid(tag));
-//     if (badIds.length) {
-//       const err = new Error('The `tags` array contains an invalid `id`');
-//       err.status = 400;
-//       return next(err);
-//     }
-//   }
-
-//   if (toUpdate.folderId === '') {
-//     delete toUpdate.folderId;
-//     toUpdate.$unset = {folderId : 1};
-//   }
-
-//   Note.findByIdAndUpdate(id, toUpdate, { new: true })
-//     .then(result => {
-//       if (result) {
-//         res.json(result);
-//       } else {
-//         next();
-//       }
-//     })
-//     .catch(err => {
-//       next(err);
-//     });
-// });
+  Offer.findByIdAndUpdate(id, toUpdate, { new: true })
+    .then(result => {
+      if (result) {
+        res.json(result);
+      } else {
+        next();
+      }
+    })
+    .catch(err => {
+      next(err);
+    });
+});
 
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
 router.delete('/:id', (req, res, next) => {
