@@ -72,17 +72,18 @@ router.get('/byuser/:user_id',(req, res, next) => {
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 /* ========== POST/CREATE AN ITEM ========== */
-router.post('/', jwtAuth, (req, res, next) => {
+router.post('/',  (req, res, next) => {
   const { 
     name,
     initial_price,
-    description
+    description,
+    user_id
   } = req.body;
 
   const newItem = { 
     name,
     initial_price,
-    user_id: req.user.id,
+    user_id,
     description
   };
 
